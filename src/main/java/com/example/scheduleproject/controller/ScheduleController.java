@@ -1,6 +1,7 @@
 package com.example.scheduleproject.controller;
 
 import com.example.scheduleproject.dto.*;
+import com.example.scheduleproject.service.CommentService;
 import com.example.scheduleproject.service.ScheduleService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -21,16 +22,16 @@ public class ScheduleController {
     }
 
     @GetMapping("/schedules/{sId}")
-    public ResponseEntity<GetResponse> findOne(@PathVariable Long sId) {
+    public ResponseEntity<GetOneResponse> findOne(@PathVariable Long sId) {
         return ResponseEntity.status(HttpStatus.OK).body(scheduleService.findOne(sId));
     }
 
-    @GetMapping("/schedules/{name}")
-    public ResponseEntity<List<GetResponse>> findAll(@PathVariable String name) {
+    @GetMapping("/schedules")
+    public ResponseEntity<List<GetResponse>> findAll(@RequestParam String name) {
         return ResponseEntity.status(HttpStatus.OK).body(scheduleService.findAll(name));
     }
 
-    @GetMapping("/schedules")
+    @GetMapping("/schedules/all") // 테스트용 전체 조회
     public ResponseEntity<List<GetResponse>> find() {
         return ResponseEntity.status(HttpStatus.OK).body(scheduleService.find());
     }

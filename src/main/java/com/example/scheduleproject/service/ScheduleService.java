@@ -3,9 +3,7 @@ package com.example.scheduleproject.service;
 import com.example.scheduleproject.dto.*;
 import com.example.scheduleproject.entity.Schedule;
 import com.example.scheduleproject.repository.ScheduleRepository;
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import org.hibernate.boot.model.internal.StrictIdGeneratorResolverSecondPass;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,6 +14,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ScheduleService {
     private final ScheduleRepository scheduleRepository;
+    private final CommentService commentService;
 
     @Transactional
     public CreateResponse create(CreateRequest request) {
@@ -38,19 +37,19 @@ public class ScheduleService {
     }
 
     @Transactional(readOnly = true)
-    public GetResponse findOne(Long sId) {
+    public GetOneResponse findOne(Long sId) {
         Schedule schedule = scheduleRepository.findById(sId).orElseThrow(
                 () -> new IllegalArgumentException("오류: 존재하지 않음")
         );
 
-        return new GetResponse(
+        return new GetOneResponse(new GetResponse(
                 schedule.getId(),
                 schedule.getTitle(),
                 schedule.getContent(),
                 schedule.getName(),
                 schedule.getCreatedAt(),
                 schedule.getModifiedAt()
-        );
+        ), commentService.findBySId(sId));
     }
 
     @Transactional(readOnly = true)
