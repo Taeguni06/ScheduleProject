@@ -1,7 +1,6 @@
 package com.example.scheduleproject.controller;
 
 import com.example.scheduleproject.dto.*;
-import com.example.scheduleproject.service.CommentService;
 import com.example.scheduleproject.service.ScheduleService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -29,7 +28,7 @@ public class ScheduleController {
 
     @GetMapping("/schedules")
     public ResponseEntity<List<GetResponse>> findAll(@RequestParam @Valid String name) {
-        return ResponseEntity.status(HttpStatus.OK).body(scheduleService.findAll(name));
+        return ResponseEntity.status(HttpStatus.OK).body(scheduleService.findByName(name));
     }
 
     @GetMapping("/schedules/all") // 테스트용 전체 조회

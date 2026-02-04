@@ -55,7 +55,7 @@ public class ScheduleService {
     }
 
     @Transactional(readOnly = true)
-    public List<GetResponse> findAll(String name) {
+    public List<GetResponse> findByName(String name) {
         List<Schedule> schedules = scheduleRepository.findByName(name);
 
         List<GetResponse> dtos = new ArrayList<>();
@@ -70,6 +70,11 @@ public class ScheduleService {
             );
             dtos.add(dto);
         }
+
+        if(dtos.isEmpty()){
+            throw new NotFoundException ("오류: 해당하는 일정이 없습니다.");
+        }
+
         return dtos;
     }
 
@@ -124,6 +129,11 @@ public class ScheduleService {
             );
             dtos.add(dto);
         }
+
+        if(dtos.isEmpty()){
+            throw new NotFoundException ("오류: 일정이 없습니다.");
+        }
+
         return dtos;
     }
 }

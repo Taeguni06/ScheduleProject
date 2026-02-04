@@ -84,6 +84,17 @@ RESPONSE
             "createdAt": "댓글 생성 시간",
             "modifiedAt": "댓글 수정 시간"
         },
+
+ERROR CASE
+
+    {
+    "timestamp": "시간",
+    "status": 404,
+    "error": "Not Found",
+    "message": "오류: 존재하지 않음",
+    "path": "/schedules"
+    }
+
 ---
 <h3>사용자 이름으로 일정 조회</h3>
 
@@ -118,6 +129,16 @@ RESPONSE
             "modifiedAt": "수정 시간"
         }
     ]
+
+ERROR CASE
+
+    {
+    "timestamp": "2026-02-04T11:48:03.2475335",
+    "status": 404,
+    "error": "Not Found",
+    "message": "오류: 해당하는 일정이 없습니다.",
+    "path": "/schedules"
+    }
 ---
 <h3>일정 전체 조회</h3>
 
@@ -143,6 +164,15 @@ RESPONSE
         "modifiedAt": "수정 시간"
     }
 
+ERROR CASE
+
+    {
+    "timestamp": "시간",
+    "status": 404,
+    "error": "Not Found",
+    "message": "오류: 일정이 없습니다.",
+    "path": "/schedules"
+    }
 ---
 <h3>일정 수정</h3>
 
@@ -175,6 +205,16 @@ RESPONSE
         "modifiedAt": "수정 시간"
     }
 
+ERROR CASE
+
+    {
+    "timestamp": "시간",
+    "status": 404,
+    "error": "Not Found",
+    "message": "오류: 존재하지 않음",
+    "path": "/schedules"
+    }
+
 ---
 <h3>일정 삭제</h3>
 
@@ -196,6 +236,20 @@ RESPONSE STATUS CODE
 | 404 | 존재하지 않는 일정 |
 | 500 | 서버 오류      |
 
+ERROR CASE
+
+    {
+    "status": 403,
+    "message": "오류: 비밀번호 불일치"
+    }
+---
+    {
+    "timestamp": "2026-02-04T11:52:35.5578062",
+    "status": 404,
+    "error": "Not Found",
+    "message": "오류: 존재하지 않음",
+    "path": "/schedules"
+    }
 ---
 
 <h3>댓글 생성</h3>
@@ -235,7 +289,20 @@ URL: /schedules/1/comments/1
 | 404 | 존재하지 않는 댓글 |
 | 500 | 서버 오류      |
 
+ERROR CASE
 
+    {
+    "status": 403,
+    "message": "오류: 비밀번호 불일치"
+    }
+---
+    {
+    "timestamp": "2026-02-04T11:53:45.8393123",
+    "status": 404,
+    "error": "Not Found",
+    "message": "오류: 존재하지 않음",
+    "path": "/schedules"
+    }
 
 
 
