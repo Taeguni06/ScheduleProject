@@ -2,9 +2,13 @@ package com.example.scheduleproject.service;
 
 import com.example.scheduleproject.dto.CreateCommentRequest;
 import com.example.scheduleproject.dto.CreateCommentResponse;
+import com.example.scheduleproject.dto.DeleteCommentRequest;
 import com.example.scheduleproject.dto.GetCommentResponse;
 import com.example.scheduleproject.entity.Comment;
+import com.example.scheduleproject.global.exception.NotEqualsPasswordException;
+import com.example.scheduleproject.global.exception.NotFoundException;
 import com.example.scheduleproject.repository.CommentRepository;
+import com.example.scheduleproject.global.exception.LimitCommentException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,17 +24,16 @@ public class CommentService {
 
     @Transactional
     public CreateCommentResponse create(Long sId, CreateCommentRequest request) {
+        if (commentRepository.countByScheduleId(sId) >= 10) {
+            throw new LimitCommentException("오류: 댓글 갯수 초과 (최대 10개)");
+        }
+
         Comment comment = new Comment(
                 sId,
                 request.getContent(),
                 request.getName(),
                 request.getPassword()
         );
-
-        if (commentRepository.countByScheduleId(sId) >= 10) {
-            throw new IllegalStateException("오류: 댓글 갯수 초과 (최대 10개)");
-        }
-
         Comment save = commentRepository.save(comment);
 
         return new CreateCommentResponse(
@@ -60,5 +63,18 @@ public class CommentService {
             dtos.add(dto);
         }
         return dtos;
+    }
+
+    @Transactional
+    public void delete(Long commentId, DeleteCommentRequest request) {
+        Comment comment = commentRepository.findById(commentId).orElseThrow(
+                () -> new NotFoundException("오류: 존재하지 않음")
+        );
+
+        if (!request.getPassword().equals(comment.getPassword())) {
+            throw new NotEqualsPasswordException("오류: 비밀번호 불일치");
+        }
+
+        commentRepository.deleteById(commentId);
     }
 }

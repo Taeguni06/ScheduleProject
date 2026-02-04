@@ -2,7 +2,9 @@ package com.example.scheduleproject.service;
 
 import com.example.scheduleproject.dto.*;
 import com.example.scheduleproject.entity.Schedule;
+import com.example.scheduleproject.global.exception.NotEqualsPasswordException;
 import com.example.scheduleproject.repository.ScheduleRepository;
+import com.example.scheduleproject.global.exception.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -39,7 +41,7 @@ public class ScheduleService {
     @Transactional(readOnly = true)
     public GetOneResponse findOne(Long sId) {
         Schedule schedule = scheduleRepository.findById(sId).orElseThrow(
-                () -> new IllegalArgumentException("오류: 존재하지 않음")
+                () -> new NotFoundException("오류: 존재하지 않음")
         );
 
         return new GetOneResponse(new GetResponse(
@@ -74,7 +76,7 @@ public class ScheduleService {
     @Transactional
     public UpdateResponse update(Long sId, UpdateRequest request) {
         Schedule schedule = scheduleRepository.findById(sId).orElseThrow(
-                () -> new IllegalArgumentException("오류: 존재하지 않음")
+                () -> new NotFoundException("오류: 존재하지 않음")
         );
 
         if (!request.getPassword().equals(schedule.getPassword())) {
@@ -96,16 +98,17 @@ public class ScheduleService {
     @Transactional
     public void delete(Long sId, DeleteRequest request) {
         Schedule schedule = scheduleRepository.findById(sId).orElseThrow(
-                () -> new IllegalArgumentException("오류: 존재하지 않음")
+                () -> new NotFoundException("오류: 존재하지 않음")
         );
 
         if (!request.getPassword().equals(schedule.getPassword())) {
-            throw new IllegalStateException("오류: 비밀번호 불일치");
+            throw new NotEqualsPasswordException("오류: 비밀번호 불일치");
         }
 
         scheduleRepository.deleteById(sId);
     }
 
+    @Transactional
     public List<GetResponse> find() {
         List<Schedule> schedules = scheduleRepository.findAll();
 
