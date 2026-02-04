@@ -1,3 +1,43 @@
+<h1>디렉토리</h1>    
+
+    src/main/java/com/example/scheduleproject
+    ├── 📁 controller
+    │   ├── CommentController.java          
+    │   └── ScheduleController.java         
+    ├── 📁 dto
+    │   ├── 📁 commentDto                   
+    │   │   ├── CreateCommentRequest.java
+    │   │   ├── CreateCommentResponse.java
+    │   │   ├── DeleteCommentRequest.java
+    │   │   ├── GetCommentResponse.java
+    │   │   ├── UpdateCommentRequest.java
+    │   │   └── UpdateCommentResponse.java
+    │   └── 📁 scheduleDto                  
+    │       ├── CreateRequest.java
+    │       ├── CreateResponse.java
+    │       ├── DeleteRequest.java
+    │       ├── GetOneResponse.java
+    │       ├── GetResponse.java
+    │       ├── UpdateRequest.java
+    │       └── UpdateResponse.java
+    ├── 📁 entity
+    │   ├── BaseEntity.java                 
+    │   ├── Comment.java                    
+    │   └── Schedule.java                   
+    ├── 📁 global
+    │   └── 📁 error
+    │       ├── GlobalExceptionHandler.java 
+    │       └── 📁 exception                 
+    │           ├── LimitCommentException.java
+    │           ├── NotEqualsPasswordException.java
+    │           └── NotFoundException.java
+    ├── 📁 repository
+    │   ├── CommentRepository.java          
+    │   └── ScheduleRepository.java        
+    ├── 📁 service
+    │   ├── CommentService.java          
+    │   └── ScheduleService.java            
+    └── ScheduleProjectApplication.java     
 <h1>API 명세서</h1>
 
 URL: localhost:8080
@@ -30,10 +70,10 @@ URL: /schedules
 REQUEST BODY
     
     {
-    "title": "String (최대 30자, 필수)",
-    "content": "String (최대 200자, 필수)",
-    "name": "String (필수)",
-    "password": "String (필수)"
+        "title": "String (최대 30자, 필수)",
+        "content": "String (최대 200자, 필수)",
+        "name": "String (필수)",
+        "password": "String (필수)"
     }
 
 RESPONSE STATUS CODE
@@ -47,7 +87,7 @@ RESPONSE STATUS CODE
 RESPONSE
 
     {
-    "id": 1 
+        "id": 1 
     }
 ---
 
@@ -88,11 +128,11 @@ RESPONSE
 ERROR CASE
 
     {
-    "timestamp": "시간",
-    "status": 404,
-    "error": "Not Found",
-    "message": "오류: 존재하지 않음",
-    "path": "/schedules"
+        "timestamp": "시간",
+        "status": 404,
+        "error": "Not Found",
+        "message": "오류: 존재하지 않음",
+        "path": "/schedules"
     }
 
 ---
@@ -133,11 +173,11 @@ RESPONSE
 ERROR CASE
 
     {
-    "timestamp": "2026-02-04T11:48:03.2475335",
-    "status": 404,
-    "error": "Not Found",
-    "message": "오류: 해당하는 일정이 없습니다.",
-    "path": "/schedules"
+        "timestamp": "시간",
+        "status": 404,
+        "error": "Not Found",
+        "message": "오류: 해당하는 일정이 없습니다.",
+        "path": "/schedules"
     }
 ---
 <h3>일정 전체 조회</h3>
@@ -167,11 +207,11 @@ RESPONSE
 ERROR CASE
 
     {
-    "timestamp": "시간",
-    "status": 404,
-    "error": "Not Found",
-    "message": "오류: 일정이 없습니다.",
-    "path": "/schedules"
+        "timestamp": "시간",
+        "status": 404,
+        "error": "Not Found",
+        "message": "오류: 일정이 없습니다.",
+        "path": "/schedules"
     }
 ---
 <h3>일정 수정</h3>
@@ -181,9 +221,9 @@ URL: /schedules/1
 REQUEST BODY
 
     {
-    "title": "String (최대 30자, 필수)",
-    "name": "String (필수)",
-    "password": "String (필수)"
+        "title": "String (최대 30자, 필수)",
+        "name": "String (필수)",
+        "password": "String (필수)"
     }
 
 RESPONSE STATUS CODE
@@ -208,11 +248,11 @@ RESPONSE
 ERROR CASE
 
     {
-    "timestamp": "시간",
-    "status": 404,
-    "error": "Not Found",
-    "message": "오류: 존재하지 않음",
-    "path": "/schedules"
+        "timestamp": "시간",
+        "status": 404,
+        "error": "Not Found",
+        "message": "오류: 존재하지 않음",
+        "path": "/schedules"
     }
 
 ---
@@ -223,7 +263,7 @@ URL: /schedules/1
 REQUEST BODY
 
     {
-    "password": "String (필수)"
+        "password": "String (필수)"
     }
 
 RESPONSE STATUS CODE
@@ -239,16 +279,16 @@ RESPONSE STATUS CODE
 ERROR CASE
 
     {
-    "status": 403,
-    "message": "오류: 비밀번호 불일치"
+        "status": 403,
+        "message": "오류: 비밀번호 불일치"
     }
 ---
     {
-    "timestamp": "2026-02-04T11:52:35.5578062",
-    "status": 404,
-    "error": "Not Found",
-    "message": "오류: 존재하지 않음",
-    "path": "/schedules"
+        "timestamp": "2026-02-04T11:52:35.5578062",
+        "status": 404,
+        "error": "Not Found",
+        "message": "오류: 존재하지 않음",
+        "path": "/schedules"
     }
 ---
 
@@ -259,9 +299,9 @@ URL: /schedules/1/comments
 REQUEST BODY
 
     {
-    "content": "String (최대 100자, 필수)",
-    "name": "String (필수)",
-    "password": "String (필수)"
+        "content": "String (최대 100자, 필수)",
+        "name": "String (필수)",
+        "password": "String (필수)"
     }
 
 RESPONSE STATUS CODE
@@ -271,11 +311,48 @@ RESPONSE STATUS CODE
 | 201 | 생성 성공   |
 | 400 | 잘못된 요청  |
 | 500 | 서버 오류   |
+---
+<h3>댓글 수정</h3>
+
+URL: /schedulse/1/comments/1
+
+REQUEST BODY
+
+    {
+        "content": String (최대 100자, 필수)
+        "password": String (필수)
+    }
+
+| 코드  | 설명         |
+|-----|------------|
+| 200 | 수정 성공      |
+| 400 | 잘못된 요청     |
+| 403 | 비밀번호 불일치   |
+| 404 | 존재하지 않는 댓글 |
+| 500 | 서버 오류      |
+
+ERROR CASE
+
+    {
+        "status": 403,
+        "message": "오류: 비밀번호 불일치"
+    }
+---
+    {
+        "timestamp": "시간",
+        "status": 404,
+        "error": "Not Found",
+        "message": "오류: 존재하지 않음",
+        "path": "/schedules"
+    }
+---
 
 ---
 <h3>댓글 삭제</h3>
 
 URL: /schedules/1/comments/1
+
+REQUEST BODY
 
     {
         "password": "String (필수)"
@@ -292,16 +369,16 @@ URL: /schedules/1/comments/1
 ERROR CASE
 
     {
-    "status": 403,
-    "message": "오류: 비밀번호 불일치"
+        "status": 403,
+        "message": "오류: 비밀번호 불일치"
     }
 ---
     {
-    "timestamp": "2026-02-04T11:53:45.8393123",
-    "status": 404,
-    "error": "Not Found",
-    "message": "오류: 존재하지 않음",
-    "path": "/schedules"
+        "timestamp": "시간",
+        "status": 404,
+        "error": "Not Found",
+        "message": "오류: 존재하지 않음",
+        "path": "/schedules"
     }
 ---
 <h1>ERD</h1>

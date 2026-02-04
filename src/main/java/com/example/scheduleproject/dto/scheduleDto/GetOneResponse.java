@@ -1,6 +1,6 @@
-package com.example.scheduleproject.dto;
+package com.example.scheduleproject.dto.scheduleDto;
 
-import com.example.scheduleproject.entity.Comment;
+import com.example.scheduleproject.dto.commentDto.GetCommentResponse;
 import lombok.Getter;
 
 import java.util.List;

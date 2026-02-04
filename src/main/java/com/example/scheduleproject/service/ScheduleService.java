@@ -1,6 +1,6 @@
 package com.example.scheduleproject.service;
 
-import com.example.scheduleproject.dto.*;
+import com.example.scheduleproject.dto.scheduleDto.*;
 import com.example.scheduleproject.entity.Schedule;
 import com.example.scheduleproject.global.exception.NotEqualsPasswordException;
 import com.example.scheduleproject.repository.ScheduleRepository;

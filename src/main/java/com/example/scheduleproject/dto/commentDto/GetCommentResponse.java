@@ -1,22 +1,21 @@
-package com.example.scheduleproject.dto;
+package com.example.scheduleproject.dto.commentDto;
 
 import lombok.Getter;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Getter
-public class CreateResponse {
+public class GetCommentResponse {
     private final Long id;
-    private final String title;
+    private final Long scheduleId;
     private final String content;
     private final String name;
     private final LocalDateTime createdAt;
     private final LocalDateTime modifiedAt;
 
-    public CreateResponse(Long id, String title, String content, String name, LocalDateTime createdAt, LocalDateTime modifiedAt) {
+    public GetCommentResponse(Long id, Long scheduleId, String content, String name, LocalDateTime createdAt, LocalDateTime modifiedAt) {
         this.id = id;
-        this.title = title;
+        this.scheduleId = scheduleId;
         this.content = content;
         this.name = name;
         this.createdAt = createdAt;

@@ -1,6 +1,6 @@
 package com.example.scheduleproject.controller;
 
-import com.example.scheduleproject.dto.*;
+import com.example.scheduleproject.dto.scheduleDto.*;
 import com.example.scheduleproject.service.ScheduleService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

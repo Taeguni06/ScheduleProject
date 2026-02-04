@@ -21,8 +21,6 @@ public class GlobalExceptionHandler {
         Map<String, Object> body = new LinkedHashMap<>();
         body.put("timestamp", LocalDateTime.now());
         body.put("status", HttpStatus.BAD_REQUEST.value());
-
-        // 에러 메시지만 추출
         String errorMessage = ex.getBindingResult().getFieldErrors().get(0).getDefaultMessage();
         body.put("error", errorMessage);
 

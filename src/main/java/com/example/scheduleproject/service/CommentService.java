@@ -1,14 +1,12 @@
 package com.example.scheduleproject.service;
 
-import com.example.scheduleproject.dto.CreateCommentRequest;
-import com.example.scheduleproject.dto.CreateCommentResponse;
-import com.example.scheduleproject.dto.DeleteCommentRequest;
-import com.example.scheduleproject.dto.GetCommentResponse;
+import com.example.scheduleproject.dto.commentDto.*;
 import com.example.scheduleproject.entity.Comment;
 import com.example.scheduleproject.global.exception.NotEqualsPasswordException;
 import com.example.scheduleproject.global.exception.NotFoundException;
 import com.example.scheduleproject.repository.CommentRepository;
 import com.example.scheduleproject.global.exception.LimitCommentException;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -76,5 +74,26 @@ public class CommentService {
         }
 
         commentRepository.deleteById(commentId);
+    }
+
+    public UpdateCommentResponse update(@Valid UpdateCommentRequest request, Long commentId) {
+        Comment comment = commentRepository.findById(commentId).orElseThrow(
+                () -> new NotFoundException("오류: 존재하지 않음")
+        );
+
+        if (!request.getPassword().equals(comment.getPassword())) {
+            throw new NotEqualsPasswordException("오류: 비밀번호 불일치");
+        }
+
+        comment.update(
+                request.getContent()
+        );
+
+        return new UpdateCommentResponse(
+                comment.getContent(),
+                comment.getName(),
+                comment.getCreatedAt(),
+                comment.getModifiedAt()
+        );
     }
 }

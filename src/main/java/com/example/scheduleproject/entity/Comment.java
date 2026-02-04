@@ -35,10 +35,7 @@ public class Comment extends BaseEntity {
         this.password = password;
     }
 
-    public void update(Long scheduleId, String content, String name, String password) {
-        this.scheduleId = scheduleId;
+    public void update(String content) {
         this.content = content;
-        this.name = name;
-        this.password = password;
     }
 }
