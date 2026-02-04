@@ -3,7 +3,6 @@ package com.example.scheduleproject.controller;
 import com.example.scheduleproject.dto.CreateCommentRequest;
 import com.example.scheduleproject.dto.CreateCommentResponse;
 import com.example.scheduleproject.dto.DeleteCommentRequest;
-import com.example.scheduleproject.dto.GetCommentResponse;
 import com.example.scheduleproject.service.CommentService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

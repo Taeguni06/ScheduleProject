@@ -303,7 +303,10 @@ ERROR CASE
     "message": "오류: 존재하지 않음",
     "path": "/schedules"
     }
+---
+<h1>ERD</h1>
 
+![img.png](img.png)
 
 
 
