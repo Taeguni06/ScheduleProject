@@ -16,6 +16,8 @@ import java.util.Map;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
+
+    // 엔티티, DTO의 필수 항목을 지키지 않았을 때
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<Map<String, Object>> handleValidation(MethodArgumentNotValidException ex) {
         Map<String, Object> body = new LinkedHashMap<>();
@@ -27,6 +29,7 @@ public class GlobalExceptionHandler {
         return ResponseEntity.badRequest().body(body);
     }
 
+    // 댓글 수 초과시
     @ExceptionHandler(LimitCommentException.class)
     public ResponseEntity<Map<String, Object>> handleCommentLimit(LimitCommentException ex) {
         Map<String, Object> body = new LinkedHashMap<>();
@@ -35,6 +38,8 @@ public class GlobalExceptionHandler {
         return ResponseEntity.badRequest().body(body);
     }
 
+
+    // 없는 일정, 댓글 조회나 삭제시
     @ExceptionHandler(NotFoundException.class)
     public ResponseEntity<Map<String, Object>> handleNotFound(NotFoundException ex) {
         Map<String, Object> body = new LinkedHashMap<>();
@@ -46,8 +51,10 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(body);
     }
 
+
+    // 비밀 번호 불일치시
     @ExceptionHandler(NotEqualsPasswordException.class)
-    public ResponseEntity<Map<String, Object>> handleCommentLimit(NotEqualsPasswordException ex) {
+    public ResponseEntity<Map<String, Object>> handleNotEquals(NotEqualsPasswordException ex) {
         Map<String, Object> body = new LinkedHashMap<>();
         body.put("status", 403);
         body.put("message", ex.getMessage());

@@ -113,6 +113,8 @@ public class ScheduleService {
         scheduleRepository.deleteById(sId);
     }
 
+
+    // 테스트용 findAll
     @Transactional
     public List<GetResponse> find() {
         List<Schedule> schedules = scheduleRepository.findAll();
